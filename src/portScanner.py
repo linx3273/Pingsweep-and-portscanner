@@ -1,4 +1,3 @@
-from enum import auto
 from scapy.all import ICMP,IP,sr1,TCP,get_if_addr,conf
 import ipaddress
 import colorama

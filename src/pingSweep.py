@@ -54,14 +54,14 @@ class pingSweep:
         print("=====================================")   
 
     def showActive(self):
-        print("\nActive networks = " + Fore.GREEN + f"{self.respCount}")
+        print("\nActive hosts = " + Fore.GREEN + f"{self.respCount}")
         print("---------------------")        
         for i in self.active:
             print(i)
         print("---------------------")
 
     def showBlock(self):
-        print(f"\nActive but blocking networks = "+ Fore.GREEN +f"{self.blockCount}")
+        print(f"\nActive but blocking hosts = "+ Fore.GREEN +f"{self.blockCount}")
         print("---------------------")        
         for i in self.blocks:
             print(i)
