@@ -1,0 +1,6 @@
+# directories
+__pycache__/
+.venv/
+
+# scripts
+activate.ps1
