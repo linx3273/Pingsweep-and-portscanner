@@ -18,9 +18,11 @@ class pingSweep:
         
         
     def sweep(self):
+        self.start = int(input("Enter start value: "))
         self.stop = int(input("Enter stop value: "))
-
+        self.checkCount = self.checkCount + self.start
         for host in self.addr:
+            host = host + self.start
             if (host in (self.addr.network_address,self.addr.broadcast_address)):
                 #ignore if address is x.x.x.0 or   x.x.x.255 
                 continue          
@@ -45,6 +47,8 @@ class pingSweep:
             self.checkCount += 1
             if self.stop==self.checkCount:
                 break
+        
+        self.checkCount = self.checkCount - self.start
 
     def showResults(self):
         print("\n\n=====================================")   

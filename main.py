@@ -15,9 +15,13 @@ def main():
             obj.check()
             obj.showResults()
         elif sys.argv[1]=="pingsweep":
-                obj = pingSweep()
-                obj.sweep()
-                obj.showResults()
+            obj = pingSweep()
+            obj.sweep()
+            obj.showResults()
+        elif sys.argv[1]=="extport":
+            obj = portScanner()
+            obj.scanExtPort()
+            obj.showResults()
 
         else:
             print("Invalid arguments. Run 'python main.py --help'")
