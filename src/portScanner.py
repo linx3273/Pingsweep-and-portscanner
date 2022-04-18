@@ -22,7 +22,9 @@ class portScanner:
         self.active = []
         self.filtered = []
     
-    def check(self):
+    def scanport(self,ext=0):
+        if ext==1:
+            self.ip = input("Enter IP address: ")
         self.start = int(input("Enter start value: "))
         self.stop = int(input("Enter stop value: "))
         
@@ -60,48 +62,7 @@ class portScanner:
             self.checkCount+=1
             if self.stop==self.checkCount:
                 break
-
-    def scanExtPort(self):
-        self.ip = input("Enter IP address: ")
-        self.start = int(input("Enter start value: "))
-        self.stop = int(input("Enter stop value: "))
-        
-        for dstPort in self.destPort:
-            dstPort = dstPort + self.start
-            # send SYN using port 3000 to dstPort
-            resp = sr1(
-                IP(dst=self.ip)/TCP(sport=self.srcPort,dport=dstPort,flags='S'),
-                timeout=1,
-                verbose=0,
-            )
-
-            if resp is None:
-                self.unused.append(dstPort)
-                self.unusedCount+=1
             
-            elif (resp.haslayer(TCP)):
-                # to close the connection if dstPort responds
-                send_rst = sr1(
-                    IP(dst=self.ip)/TCP(sport=self.srcPort,dport=dstPort,flags='R'),
-                    timeout=1,
-                    verbose=0,
-                )
-
-                self.activeCount+=1
-                self.active.append(dstPort)
-
-            elif (resp.haslayer(ICMP)):
-                if( int(resp.getlayer(ICMP).type) == 3 and int(resp.getlayer(ICMP).code) in [1,2,3,9,10,13]):
-                    self.filteredCount+=1
-                    self.filtered.append(dstPort)
-                
-
-            print(dstPort)
-            self.checkCount+=1
-            if self.stop==self.checkCount:
-                break
-
-
 
     def showResults(self,ext=0):
         print("\n\n=====================================")   

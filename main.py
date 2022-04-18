@@ -12,7 +12,7 @@ def main():
         
         elif sys.argv[1]=="scanport":
             obj = portScanner()
-            obj.check()
+            obj.scanport()
             obj.showResults()
         elif sys.argv[1]=="pingsweep":
             obj = pingSweep()
@@ -20,7 +20,7 @@ def main():
             obj.showResults()
         elif sys.argv[1]=="extport":
             obj = portScanner()
-            obj.scanExtPort()
+            obj.scanport(ext=1)
             obj.showResults(ext=1)
 
         else:
