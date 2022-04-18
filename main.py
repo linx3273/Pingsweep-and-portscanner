@@ -21,7 +21,7 @@ def main():
         elif sys.argv[1]=="extport":
             obj = portScanner()
             obj.scanExtPort()
-            obj.showResults()
+            obj.showResults(ext=1)
 
         else:
             print("Invalid arguments. Run 'python main.py --help'")

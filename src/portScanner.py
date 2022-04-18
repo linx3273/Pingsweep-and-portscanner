@@ -103,12 +103,13 @@ class portScanner:
 
 
 
-    def showResults(self):
+    def showResults(self,ext=0):
         print("\n\n=====================================")   
         print("Total checks = " + Fore.GREEN + f"{self.checkCount}")
         self.showActive()
         self.showFiltered()
-        self.showUnused()
+        if ext==0:
+            self.showUnused()
         print("=====================================")  
 
     def showActive(self):
