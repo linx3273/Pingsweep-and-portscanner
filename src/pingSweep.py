@@ -10,11 +10,11 @@ class pingSweep:
         # getting the network range for currently connected network
         self.addr = ipaddress.ip_network(get_if_addr(conf.iface)+'/'+'255.255.255.0',strict=False)
 
-        self.respCount = 0
-        self.blockCount = 0
-        self.checkCount = 0
-        self.blocks = []
-        self.active = []
+        self.__respCount = 0
+        self.__blockCount = 0
+        self.__checkCount = 0
+        self.__blocks = []
+        self.__active = []
         
         
     def sweep(self):
@@ -38,35 +38,35 @@ class pingSweep:
                 pass
             elif (int(resp.getlayer(ICMP).type)==3 and int(resp.getlayer(ICMP).code in [1,2,3,9,10,13])):
                 self.block.append(host)
-                self.blockCount+=1
+                self.__blockCount+=1
             else:
                 self.active.append(host)
-                self.respCount+=1
+                self.__respCount+=1
             
-            self.checkCount += 1
-            if self.stop==self.checkCount:
+            self.__checkCount += 1
+            if self.stop==self.__checkCount:
                 break
         
 
 
     def showResults(self):
         print("\n\n=====================================")   
-        print("Total checks = " + Fore.GREEN + f"{self.checkCount}")
+        print("Total checks = " + Fore.GREEN + f"{self.__checkCount}")
         self.showActive()
         self.showBlock()
         print("=====================================")   
 
     def showActive(self):
-        print("\nActive hosts = " + Fore.GREEN + f"{self.respCount}")
+        print("\nActive hosts = " + Fore.GREEN + f"{self.__respCount}")
         print("---------------------")        
         for i in self.active:
             print(i)
         print("---------------------")
 
     def showBlock(self):
-        print(f"\nActive but blocking hosts = "+ Fore.GREEN +f"{self.blockCount}")
+        print(f"\nActive but blocking hosts = "+ Fore.GREEN +f"{self.__blockCount}")
         print("---------------------")        
-        for i in self.blocks:
+        for i in self.__blocks:
             print(i)
         print("---------------------")
 
