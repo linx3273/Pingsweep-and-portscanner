@@ -40,7 +40,7 @@ class pingSweep:
                 self.block.append(host)
                 self.__blockCount+=1
             else:
-                self.active.append(host)
+                self.__active.append(host)
                 self.__respCount+=1
             
             self.__checkCount += 1
@@ -59,7 +59,7 @@ class pingSweep:
     def showActive(self):
         print("\nActive hosts = " + Fore.GREEN + f"{self.__respCount}")
         print("---------------------")        
-        for i in self.active:
+        for i in self.__active:
             print(i)
         print("---------------------")
 
